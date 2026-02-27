@@ -17,6 +17,7 @@ frontend/dist/
 
 # Misc
 convo.txt
+misc/
 
 # OS
 .DS_Store

@@ -1,60 +1,22 @@
 <script setup>
 import { BookOpen } from 'lucide-vue-next'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card'
 </script>
 
 <template>
-  <div class="min-h-screen bg-background">
-    <!-- Header -->
-    <header class="border-b border-border">
-      <div class="max-w-5xl mx-auto px-6 py-4 flex items-center gap-3">
-        <BookOpen class="size-6 text-primary" />
-        <span class="text-xl font-semibold tracking-tight">Lexio</span>
-        <Badge variant="secondary" class="ml-auto">Alpha</Badge>
+  <div class="min-h-screen bg-background flex flex-col">
+    <header class="border-b border-border shrink-0">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center gap-3">
+        <BookOpen class="size-5 text-primary" />
+        <RouterLink to="/" class="text-lg font-semibold tracking-tight hover:opacity-80">Lexio</RouterLink>
+        <Badge variant="secondary" class="ml-0">Alpha</Badge>
+        <nav class="ml-auto flex items-center gap-4 text-sm">
+          <RouterLink to="/" class="text-muted-foreground hover:text-foreground transition-colors">Home</RouterLink>
+          <RouterLink to="/library" class="text-muted-foreground hover:text-foreground transition-colors">Library</RouterLink>
+        </nav>
       </div>
     </header>
 
-    <!-- Hero -->
-    <main class="max-w-5xl mx-auto px-6 py-20 text-center">
-      <h1 class="text-4xl font-bold tracking-tight mb-4">
-        Read German. Learn faster.
-      </h1>
-      <p class="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
-        Upload any text or PDF and read it word by word — with translations, progress tracking, and more coming soon.
-      </p>
-      <div class="flex items-center justify-center gap-3">
-        <Button size="lg">Open Library</Button>
-        <Button size="lg" variant="outline">Upload a Book</Button>
-      </div>
-    </main>
-
-    <!-- Features -->
-    <section class="max-w-5xl mx-auto px-6 pb-20 grid sm:grid-cols-3 gap-4">
-      <Card>
-        <CardHeader>
-          <CardTitle class="text-base">Upload Text & PDF</CardTitle>
-          <CardDescription>Drop in any .txt or .pdf file and start reading instantly.</CardDescription>
-        </CardHeader>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle class="text-base">Paginated Reader</CardTitle>
-          <CardDescription>Books are split into readable pages so you can track your progress.</CardDescription>
-        </CardHeader>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle class="text-base">Translations Soon</CardTitle>
-          <CardDescription>Click any word to get an instant DeepL translation inline.</CardDescription>
-        </CardHeader>
-      </Card>
-    </section>
+    <RouterView />
   </div>
 </template>
