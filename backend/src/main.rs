@@ -54,6 +54,7 @@ fn split_into_pages(text: &str) -> Vec<String> {
 #[derive(Deserialize)]
 struct TranslateRequest {
     word: String,
+    target_lang: Option<String>,
 }
 
 #[derive(Serialize)]
@@ -83,8 +84,7 @@ async fn translate(
         .header("Authorization", format!("DeepL-Auth-Key {api_key}"))
         .json(&serde_json::json!({
             "text": [body.word],
-            "source_lang": "DE",
-            "target_lang": "EN"
+            "target_lang": body.target_lang.as_deref().unwrap_or("EN")
         }))
         .send()
         .await

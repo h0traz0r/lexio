@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: lexio-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    envVars:
+      - key: DEEPL_API_KEY
+        sync: false
+      - key: BACKEND_PORT
+        value: 3000

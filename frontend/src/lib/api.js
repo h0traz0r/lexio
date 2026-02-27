@@ -1,4 +1,4 @@
-const BASE = 'http://localhost:3000'
+const BASE = import.meta.env.VITE_API_BASE || 'http://localhost:3000'
 
 export async function uploadPdf(file, title) {
   const form = new FormData()
@@ -9,11 +9,11 @@ export async function uploadPdf(file, title) {
   return res.json() // { title, pages: string[] }
 }
 
-export async function translateWord(word) {
+export async function translateWord(word, targetLang = 'EN') {
   const res = await fetch(`${BASE}/api/translate`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ word }),
+    body: JSON.stringify({ word, target_lang: targetLang }),
   })
   if (!res.ok) throw new Error(await res.text())
   const data = await res.json()

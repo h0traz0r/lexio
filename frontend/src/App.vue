@@ -1,6 +1,7 @@
 <script setup>
 import { BookOpen } from 'lucide-vue-next'
 import { Badge } from '@/components/ui/badge'
+import LanguageSelector from '@/components/LanguageSelector.vue'
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import { Badge } from '@/components/ui/badge'
         <RouterLink to="/" class="text-lg font-semibold tracking-tight hover:opacity-80">Lexio</RouterLink>
         <Badge variant="secondary" class="ml-0">Alpha</Badge>
         <nav class="ml-auto flex items-center gap-4 text-sm">
+          <LanguageSelector />
           <RouterLink to="/" class="text-muted-foreground hover:text-foreground transition-colors">Home</RouterLink>
           <RouterLink to="/library" class="text-muted-foreground hover:text-foreground transition-colors">Library</RouterLink>
         </nav>

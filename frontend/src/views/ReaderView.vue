@@ -7,9 +7,11 @@ import WordToken from '@/components/WordToken.vue'
 import TranslationBubble from '@/components/TranslationBubble.vue'
 import { translateWord } from '@/lib/api.js'
 import { useBook } from '@/composables/useBook.js'
+import { useLanguage } from '@/composables/useLanguage.js'
 
 const router = useRouter()
 const { book } = useBook()
+const { targetLang } = useLanguage()
 
 const currentPage = ref(0)
 const selectedWord = ref(null)
@@ -43,7 +45,7 @@ async function selectWord(word, event) {
   translation.value = null
   translating.value = true
   try {
-    translation.value = await translateWord(word)
+    translation.value = await translateWord(word, targetLang.value)
   } finally {
     translating.value = false
   }
