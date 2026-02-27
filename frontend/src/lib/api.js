@@ -20,8 +20,8 @@ export async function translateWord(word, targetLang = 'EN') {
   return data.translation
 }
 
-export async function gutenbergSearch(query) {
-  const res = await fetch(`${BASE}/api/gutenberg/search?q=${encodeURIComponent(query)}`)
+export async function gutenbergSearch(query, lang = 'de') {
+  const res = await fetch(`${BASE}/api/gutenberg/search?q=${encodeURIComponent(query)}&lang=${lang}`)
   if (!res.ok) throw new Error(await res.text())
   return res.json() // BookSummary[]
 }

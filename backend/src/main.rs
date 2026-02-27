@@ -108,6 +108,7 @@ async fn translate(
 #[derive(Deserialize)]
 struct GutenbergSearchQuery {
     q: String,
+    lang: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -143,7 +144,7 @@ async fn gutenberg_search(
     let client = reqwest::Client::new();
     let res: GutendexResponse = client
         .get("https://gutendex.com/books/")
-        .query(&[("languages", "de"), ("search", &params.q)])
+        .query(&[("languages", params.lang.as_deref().unwrap_or("de")), ("search", &params.q)])
         .send()
         .await
         .map_err(|e| e.to_string())?

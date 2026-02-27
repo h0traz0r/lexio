@@ -10,18 +10,29 @@ const router = useRouter()
 const { setBook } = useBook()
 
 const query = ref('')
+const lang = ref('de')
 const books = ref([])
 const loading = ref(false)
 const importing = ref(null) // book id being imported
 const error = ref(null)
 
+const SEARCH_LANGS = [
+  { code: 'de', flag: '🇩🇪', label: 'German' },
+  { code: 'en', flag: '🇬🇧', label: 'English' },
+  { code: 'fr', flag: '🇫🇷', label: 'French' },
+  { code: 'es', flag: '🇪🇸', label: 'Spanish' },
+  { code: 'it', flag: '🇮🇹', label: 'Italian' },
+  { code: 'ru', flag: '🇷🇺', label: 'Russian' },
+  { code: 'pt', flag: '🇵🇹', label: 'Portuguese' },
+]
+
 let debounceTimer = null
 
-async function search(q) {
+async function search() {
   loading.value = true
   error.value = null
   try {
-    books.value = await gutenbergSearch(q)
+    books.value = await gutenbergSearch(query.value, lang.value)
   } catch (err) {
     error.value = err.message
   } finally {
@@ -31,7 +42,12 @@ async function search(q) {
 
 function onInput() {
   clearTimeout(debounceTimer)
-  debounceTimer = setTimeout(() => search(query.value), 400)
+  debounceTimer = setTimeout(() => search(), 400)
+}
+
+function setLang(code) {
+  lang.value = code
+  search()
 }
 async function importBook(book) {
   importing.value = book.id
@@ -45,12 +61,24 @@ async function importBook(book) {
   }
 }
 
-onMounted(() => search(''))
+onMounted(() => search())
 </script>
 
 <template>
   <main class="flex-1 flex flex-col">
     <div class="max-w-4xl mx-auto w-full px-6 py-8 flex flex-col gap-6">
+      <!-- Language picker -->
+      <div class="flex items-center gap-1">
+        <button
+          v-for="l in SEARCH_LANGS"
+          :key="l.code"
+          :title="l.label"
+          class="text-lg leading-none px-1.5 py-0.5 rounded transition-colors"
+          :class="lang === l.code ? 'bg-primary/15 ring-1 ring-primary/40' : 'opacity-50 hover:opacity-100'"
+          @click="setLang(l.code)"
+        >{{ l.flag }}</button>
+      </div>
+
       <!-- Search -->
       <div class="relative">
         <Search class="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
@@ -58,7 +86,7 @@ onMounted(() => search(''))
           v-model="query"
           @input="onInput"
           type="text"
-          placeholder="Search German books… e.g. Kafka, Goethe, Grimm"
+          :placeholder="`Search ${SEARCH_LANGS.find(l => l.code === lang)?.label} books…`"
           class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
         />
       </div>
