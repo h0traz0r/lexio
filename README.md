@@ -4,6 +4,8 @@ Read foreign-language books and translate any word instantly with a click.
 
 ## Screenshots
 
+> UI designed in Figma
+
 ![Main page](screenshots/main-page.png)
 ![Help panel](screenshots/help-panel.png)
 ![Settings](screenshots/settings.png)
