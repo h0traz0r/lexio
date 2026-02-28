@@ -1,0 +1,13 @@
+{
+  "hero.title": "Read foreign books. Learn naturally.",
+  "hero.subtitle": "Browse classic literature or upload your own PDF. Click any word for an instant translation.",
+  "hero.browse": "Browse Library",
+  "hero.upload": "Upload PDF",
+  "hero.uploading": "Uploading…",
+  "feature.library.title": "Gutenberg Library",
+  "feature.library.desc": "Thousands of free classics from Project Gutenberg, ready to read.",
+  "feature.reader.title": "Immersive Reader",
+  "feature.reader.desc": "Paginated text with clickable words. Read at your own pace.",
+  "feature.translation.title": "Instant Translation",
+  "feature.translation.desc": "Click any word for a DeepL-powered translation. No copy-pasting."
+}

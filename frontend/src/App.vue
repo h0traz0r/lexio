@@ -1,7 +1,14 @@
 <script setup>
+import { watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { BookOpen } from 'lucide-vue-next'
 import { Badge } from '@/components/ui/badge'
 import LanguageSelector from '@/components/LanguageSelector.vue'
+import { useLanguage } from '@/composables/useLanguage.js'
+
+const { locale } = useI18n()
+const { targetLang } = useLanguage()
+watch(targetLang, (v) => { locale.value = v.toLowerCase() }, { immediate: true })
 </script>
 
 <template>

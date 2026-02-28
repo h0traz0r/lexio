@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 import { useRouter } from 'vue-router'
 import { Upload, BookOpen, Languages, Library } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
@@ -36,21 +39,21 @@ async function onFileChange(e) {
     <!-- Hero -->
     <section class="flex-1 flex flex-col items-center justify-center gap-6 px-6 text-center py-20">
       <h1 class="text-4xl sm:text-5xl font-bold tracking-tight max-w-xl leading-tight">
-        Read German. Learn naturally.
+        {{ t('hero.title') }}
       </h1>
       <p class="text-muted-foreground max-w-md text-lg">
-        Browse classic German literature or upload your own PDF. Click any word for an instant translation.
+        {{ t('hero.subtitle') }}
       </p>
       <div class="flex flex-wrap gap-3 justify-center mt-2">
         <Button size="lg" as-child>
           <RouterLink to="/library">
             <Library class="size-4 mr-2" />
-            Browse Library
+            {{ t('hero.browse') }}
           </RouterLink>
         </Button>
         <Button size="lg" variant="outline" :disabled="uploading" @click="fileInput.click()">
           <Upload class="size-4 mr-2" />
-          {{ uploading ? 'Uploading…' : 'Upload PDF' }}
+          {{ uploading ? t('hero.uploading') : t('hero.upload') }}
         </Button>
       </div>
       <p v-if="uploadError" class="text-destructive text-sm max-w-sm">{{ uploadError }}</p>
@@ -64,22 +67,22 @@ async function onFileChange(e) {
           <div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <Library class="size-5 text-primary" />
           </div>
-          <h3 class="font-semibold">Gutenberg Library</h3>
-          <p class="text-sm text-muted-foreground">Thousands of free German classics from Project Gutenberg, ready to read.</p>
+          <h3 class="font-semibold">{{ t('feature.library.title') }}</h3>
+          <p class="text-sm text-muted-foreground">{{ t('feature.library.desc') }}</p>
         </div>
         <div class="flex flex-col items-center text-center gap-3">
           <div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <BookOpen class="size-5 text-primary" />
           </div>
-          <h3 class="font-semibold">Immersive Reader</h3>
-          <p class="text-sm text-muted-foreground">Paginated text with clickable words. Read at your own pace.</p>
+          <h3 class="font-semibold">{{ t('feature.reader.title') }}</h3>
+          <p class="text-sm text-muted-foreground">{{ t('feature.reader.desc') }}</p>
         </div>
         <div class="flex flex-col items-center text-center gap-3">
           <div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
             <Languages class="size-5 text-primary" />
           </div>
-          <h3 class="font-semibold">Instant Translation</h3>
-          <p class="text-sm text-muted-foreground">Click any word for a DeepL-powered translation. No copy-pasting.</p>
+          <h3 class="font-semibold">{{ t('feature.translation.title') }}</h3>
+          <p class="text-sm text-muted-foreground">{{ t('feature.translation.desc') }}</p>
         </div>
       </div>
     </section>
